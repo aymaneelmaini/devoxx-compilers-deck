@@ -22,7 +22,7 @@ layout: intro
 <!--
 ~1 min. Let the question land and pause so people can guess before you reveal the answer.
 
-"Hello, I'm Aymane, a software engineer at iMedia24, where we build software for clients across all of Europe. I'm interested in systems and compilers engineering, and I love to dig into this stuff in my free time. Today's topic is a beginner introduction to how compilers work. We're going to open the black box and see what really happens."
+"Hello, I'm Aymane, a software engineer at iMedia24. I'm interested in systems and compilers engineering, and I love to dig into this stuff in my free time. Today's topic is a beginner introduction to how compilers work. We're going to open the black box and see what really happens."
 -->
 
 ---
@@ -30,6 +30,8 @@ layout: intro
 # Hi, I'm Aymane
 
 <div class="mt-8 text-2xl max-w-2xl">
+
+Software engineer at iMedia24
 
 Building software for clients across all of Europe
 
@@ -51,7 +53,7 @@ Interested in compilers and systems engineering
 <!--
 ~1 min. Keep the intro short. Name the company once.
 
-Full script: "Hello, I'm Aymane, a software engineer at iMedia24, where we build software for clients across all of Europe. I'm interested in systems and compilers engineering, and I love to dig into this stuff in my free time."
+Full script: "Hello, I'm Aymane, a software engineer at iMedia24. I'm interested in systems and compilers engineering, and I love to dig into this stuff in my free time."
 -->
 
 ---
