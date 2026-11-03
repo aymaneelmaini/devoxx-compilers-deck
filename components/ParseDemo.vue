@@ -7,7 +7,7 @@ type Expr =
   | { kind: 'bin'; op: string; left: Expr; right: Expr }
   | { kind: 'group'; expr: Expr }
 
-const source = ref('1 + 2 * 3')
+const source = ref('3 + 5 * 8')
 
 function tokenize(src: string): Token[] {
   const tokens: Token[] = []

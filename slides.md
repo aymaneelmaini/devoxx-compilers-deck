@@ -10,11 +10,10 @@ duration: 20min
 colorSchema: both
 ---
 
+
 ---
 layout: intro
 ---
-
-
 
 # What's the hardest part of implementing a programming language?
 
@@ -37,6 +36,10 @@ Building software for clients across all of Europe
 
 </div>
 
+<div class="mt-8 max-w-2xl">
+<img src="/imedia24-logo.svg" alt="iMedia24" class="h-40 w-auto" />
+</div>
+
 <v-click>
 
 <div class="mt-6 text-xl opacity-70">
@@ -47,7 +50,6 @@ Interested in compilers and systems engineering
 
 </v-click>
 
-<img src="/imedia24-logo.svg" alt="iMedia24" class="absolute right-12 top-24 h-32" />
 <img src="/aymane.jpg" alt="Aymane" class="absolute right-12 top-64 w-56 h-56 rounded-full object-cover" />
 
 <!--
@@ -73,6 +75,12 @@ Point at the three phases: front end (scanning, parsing, analysis), middle end (
 ---
 
 # Scanning
+
+<div class="grid grid-cols-[auto_1fr] gap-x-8 gap-y-3 mt-8 text-lg">
+<div class="opacity-60">Input</div><div>source code</div>
+<div class="opacity-60">Output</div><div>tokens</div>
+<div class="opacity-60">What it does</div><div>breaks source into meaningful chunks</div>
+</div>
 
 <div class="text-2xl font-mono mt-6">total = price * qty;</div>
 
@@ -103,18 +111,49 @@ Running example: `total = price * qty;`. If the closing quote is missing, the sc
 
 ---
 
+# Up next: Parsing
+
+<div class="relative mx-auto mt-4 w-fit max-w-full">
+<img src="/crafting-interpreters-pipeline.png" alt="Compiler pipeline mountain" class="block max-h-[62vh] w-auto" />
+
+<div class="absolute" style="left:14.80%;top:32.41%;width:16.45%;height:15.61%"><div class="hl h-full w-full rounded-full border-4 border-red-500"></div></div>
+</div>
+
+
+<style>
+.hl { animation: pulse 1.4s ease-in-out infinite; }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.08); opacity: 0.5; }
+}
+</style>
+
+<!--
+~0.5 min. Script: "Next, parsing. It takes the tokens and builds a tree that shows their structure."
+-->
+
+---
+
 # Parsing
 
-<div class="text-lg opacity-70">Tokens → Abstract Syntax Tree</div>
+<div class="grid grid-cols-[auto_1fr] gap-x-8 gap-y-3 mt-8 text-lg">
+<div class="opacity-60">Input</div><div>tokens</div>
+<div class="opacity-60">Output</div><div>AST</div>
+<div class="opacity-60">What it does</div><div>gives the tokens structure; precedence is the tree's shape</div>
+</div>
 
-<div class="mt-8">
+
+
+<div class="mt-8 text-2xl font-mono">3 + 5 * 8</div>
+
+<div class="mt-6">
 
 ```text
     +
    / \
-  1   *
+  3   *
      / \
-    2   3
+    5   8
 ```
 
 </div>
@@ -135,6 +174,12 @@ Recursive descent is the most common hand-written approach: one function per pre
 
 # Parsing errors
 
+<div class="grid grid-cols-[auto_1fr] gap-x-8 gap-y-3 mt-8 text-lg">
+<div class="opacity-60">Input</div><div>tokens</div>
+<div class="opacity-60">Output</div><div>AST, or an error</div>
+<div class="opacity-60">What it does</div><div>checks the sequence against the grammar</div>
+</div>
+
 <div class="mt-8 text-2xl font-mono">total = price * ;</div>
 
 <v-click>
@@ -151,9 +196,17 @@ Recursive descent is the most common hand-written approach: one function per pre
 
 # Parsing statements
 
+<div class="grid grid-cols-[auto_1fr] gap-x-8 gap-y-3 mt-8 text-lg">
+<div class="opacity-60">Input</div><div>tokens</div>
+<div class="opacity-60">Output</div><div>AST with nested statements</div>
+<div class="opacity-60">What it does</div><div>builds statements, nested inside each other</div>
+</div>
+
 <div class="text-lg opacity-70">Not just expressions</div>
 
-<div class="mt-8">
+<div class="mt-8 text-2xl font-mono">if (qty > 0) total = price * qty;</div>
+
+<div class="mt-6">
 
 ```text
 If
@@ -182,7 +235,27 @@ If the closing parenthesis is missing, the parser stops at that point and report
 
 ---
 
+# Up next: Static analysis
+
+<div class="relative mx-auto mt-4 w-fit max-w-full">
+<img src="/crafting-interpreters-pipeline.png" alt="Compiler pipeline mountain" class="block max-h-[62vh] w-auto" />
+
+<div class="absolute" style="left:27.96%;top:3.60%;width:16.45%;height:14.89%"><div class="hl h-full w-full rounded-full border-4 border-red-500"></div></div>
+</div>
+
+<!--
+~0.5 min. Script: "Next, static analysis. The tree is checked for meaning before the program runs."
+-->
+
+---
+
 # Static analysis
+
+<div class="grid grid-cols-[auto_1fr] gap-x-8 gap-y-3 mt-8 text-lg">
+<div class="opacity-60">Input</div><div>AST</div>
+<div class="opacity-60">Output</div><div>checked AST</div>
+<div class="opacity-60">What it does</div><div>resolves names, binds variables to scopes, checks types</div>
+</div>
 
 <div class="mt-8 text-2xl font-mono">total = pricee * qty;</div>
 
@@ -202,7 +275,27 @@ Contrast: Python reports the same typo as a NameError, but only when that line r
 
 ---
 
+# Up next: Optimization
+
+<div class="relative mx-auto mt-4 w-fit max-w-full">
+<img src="/crafting-interpreters-pipeline.png" alt="Compiler pipeline mountain" class="block max-h-[62vh] w-auto" />
+
+<div class="absolute" style="left:38.65%;top:22.21%;width:14.25%;height:16.81%"><div class="hl h-full w-full rounded-full border-4 border-red-500"></div></div>
+</div>
+
+<!--
+~0.5 min. Script: "Next, optimization. The compiler rewrites the program to do less work."
+-->
+
+---
+
 # Optimization
+
+<div class="grid grid-cols-[auto_1fr] gap-x-8 gap-y-3 mt-8 text-lg">
+<div class="opacity-60">Input</div><div>IR</div>
+<div class="opacity-60">Output</div><div>faster code, same behavior</div>
+<div class="opacity-60">What it does</div><div>folds constants, removes dead code, inlines calls</div>
+</div>
 
 <div class="grid grid-cols-3 gap-6 mt-10 text-center">
 <div class="border rounded-xl p-6">
@@ -236,7 +329,27 @@ Stress: the optimizer must never change what the program does. That's where the 
 
 ---
 
+# Up next: Code generation
+
+<div class="relative mx-auto mt-4 w-fit max-w-full">
+<img src="/crafting-interpreters-pipeline.png" alt="Compiler pipeline mountain" class="block max-h-[62vh] w-auto" />
+
+<div class="absolute" style="left:73.19%;top:33.25%;width:20.29%;height:10.80%"><div class="hl h-full w-full rounded-full border-4 border-red-500"></div></div>
+</div>
+
+<!--
+~0.5 min. Script: "Next, code generation. We pick the target: bytecode, native code, or another language."
+-->
+
+---
+
 # Code generation
+
+<div class="grid grid-cols-[auto_1fr] gap-x-8 gap-y-3 mt-8 text-lg">
+<div class="opacity-60">Input</div><div>optimized IR</div>
+<div class="opacity-60">Output</div><div>bytecode, native code or another language</div>
+<div class="opacity-60">What it does</div><div>picks the target</div>
+</div>
 
 <div class="grid grid-cols-3 gap-6 mt-10 text-center">
 <div class="border rounded-xl p-6">
@@ -264,6 +377,7 @@ Stress: the optimizer must never change what the program does. That's where the 
 
 <v-click>
 
+
 <div class="mt-10 text-xl">An intermediate representation (IR) sits in the middle.</div>
 
 </v-click>
@@ -276,26 +390,73 @@ The IR matters most: each front end targets the IR and each back end reads it, s
 
 ---
 
-# Runtime
+# Why the IR matters
 
-<div class="mt-8 text-2xl font-mono">price.multiply(qty)</div>
+Kotlin has one frontend and several backends
 
-<v-click>
-
-<div class="mt-6 text-xl font-mono">NullPointerException</div>
-
-</v-click>
+<div class="mt-2 flex justify-center">
+<img src="/IR-diagram.png" alt="Kotlin and other JVM languages share one bytecode backend" style="height: 330px; width: auto" />
+</div>
 
 <v-click>
 
-<div class="mt-6 text-lg opacity-70">It compiles fine. It fails only when this line runs, with price = null.</div>
+<div class="mt-3 text-xl">The frontend scans, parses and checks Kotlin once. Only the backend changes.</div>
 
 </v-click>
 
 <!--
-~1.5 min. Script: "The runtime is the layer that executes your code. It handles memory, garbage collection, and checks that can only happen while the program runs."
+~1.5 min. Script: "Kotlin is a good example of the IR paying off. One frontend, three backends. The JVM bytecode is the decoupling point: any language that compiles to it runs on the same VM, which is why Java, Scala and Clojure share it."
+-->
 
-This is the last stage. Nothing catches the null before execution, so the error appears at runtime. The JVM is the runtime that throws it.
+---
+
+# Up next: Runtime
+
+<img src="/crafting-interpreters-pipeline.png" alt="Compiler pipeline mountain" class="mx-auto mt-4 max-h-[64vh] w-auto" />
+
+<!--
+~0.5 min. Script: "Next, the runtime. This is where the program actually executes."
+-->
+
+---
+
+# Runtime
+
+<div class="grid grid-cols-[auto_1fr] gap-x-8 gap-y-3 mt-8 text-lg">
+<div class="opacity-60">Input</div><div>compiled code</div>
+<div class="opacity-60">Output</div><div>a running program</div>
+<div class="opacity-60">What it does</div><div>manages memory, garbage collection and runtime checks</div>
+</div>
+
+<div class="grid grid-cols-3 gap-6 mt-10 text-center">
+<div class="border rounded-xl p-6">
+
+**Memory management**
+
+<div class="mt-3 opacity-70">allocates objects and tracks where they live</div>
+
+</div>
+<div class="border rounded-xl p-6">
+
+**Garbage collection**
+
+<div class="mt-3 opacity-70">finds objects nothing points to anymore and frees them</div>
+
+</div>
+<div class="border rounded-xl p-6">
+
+**Runtime checks**
+
+<div class="mt-3 opacity-70">array bounds, null access, failed casts</div>
+
+</div>
+</div>
+
+
+<!--
+~1.5 min. Script: "The runtime runs your program and does three jobs. It manages memory: it allocates objects. It garbage-collects: it frees objects nothing points to anymore. And it runs checks that only make sense while the program runs, like array bounds."
+
+Index 10 on a three-element array compiles fine. The check only happens when the line runs, so the error shows up at runtime.
 -->
 
 ---
@@ -385,7 +546,6 @@ layout: intro
 
 ## Questions?
 
-<img src="/imedia24-logo.svg" alt="iMedia24" class="absolute bottom-10 right-16 h-12" />
 
 <!--
 Script: "Thank you for staying with me."
