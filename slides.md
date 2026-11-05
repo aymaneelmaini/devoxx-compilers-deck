@@ -17,11 +17,90 @@ layout: intro
 
 # What's the hardest part of implementing a programming language?
 
+<v-click>
+
+<div class="mt-10 text-2xl italic">"There are only two hard things in Computer Science: cache invalidation and naming things."</div>
+
+<div class="mt-4 text-lg opacity-70">Phil Karlton</div>
+
+</v-click>
 
 <!--
 ~1 min. Let the question land and pause so people can guess before you reveal the answer.
 
-"Hello, I'm Aymane, a software engineer at iMedia24. I'm interested in systems and compilers engineering, and I love to dig into this stuff in my free time. Today's topic is a beginner introduction to how compilers work. We're going to open the black box and see what really happens."
+Say out loud: "Choosing a name." Then click to show the quote. Say: "Naming things is hard enough that a well-known quote calls it one of only two hard things in computer science. Some of you are smiling, and that's the right reaction. Let's start with something more interesting."
+-->
+
+---
+layout: intro
+---
+
+# What makes a language a programming language?
+
+<v-click>
+
+<div class="mt-8 text-xl opacity-70">Let's find out with a story from 1936.</div>
+
+</v-click>
+
+<!--
+~0.5 min. Say: "Quick question. What makes a language a compiled language? Take a guess. Don't worry if you're not sure. Let's find out with a story from 1936."
+-->
+
+---
+
+# 1936: A machine that can do anything
+
+<div class="flex justify-center gap-2 mt-8 font-mono text-2xl">
+<div class="w-16 h-16 border-2 rounded-lg flex items-center justify-center">0</div>
+<div class="w-16 h-16 border-2 rounded-lg flex items-center justify-center">1</div>
+<div class="w-16 h-16 border-2 rounded-lg flex items-center justify-center">1</div>
+<div class="w-16 h-16 border-2 rounded-lg flex items-center justify-center opacity-40">blank</div>
+</div>
+
+<div class="flex justify-center gap-2 mt-2 text-3xl">
+<div class="w-16 text-center">▲</div>
+<div class="w-16"></div>
+<div class="w-16"></div>
+<div class="w-16"></div>
+</div>
+
+<v-click>
+
+<div class="mt-8 text-xl">A strip of boxes, each holding a 0 or a 1</div>
+
+</v-click>
+
+<v-click>
+
+<div class="mt-3 text-xl">A head that reads one box at a time</div>
+
+</v-click>
+
+<v-click>
+
+<div class="mt-3 text-xl">A list of rules: if you see this, write that, then move</div>
+
+</v-click>
+
+<v-click>
+
+<div class="mt-8 text-xl opacity-80">Rule: flip every bit. The strip goes from 0 1 1 to 1 0 0.</div>
+
+</v-click>
+
+<v-click>
+
+<div class="mt-6 text-xl">A language that can do what this machine can do is **Turing complete**.</div>
+
+</v-click>
+
+<!--
+~2 min. Say: "In 1936, a young mathematician named Alan Turing asked a simple question: can a very simple machine do any calculation a computer can do? So he imagined one. It has three things: a long strip of paper, split into boxes, where each box holds a 0 or a 1. A head that reads one box at a time. And a list of rules: if you see this, write that, then move.
+
+Here's a tiny example. The strip says 0, 1, 1. The rule is: flip every bit. The head goes box by box, flips them, and stops at the blank. The strip now says 1, 0, 0.
+
+Turing showed that a machine like this, with the right rules, can do the work of any computer. A language that can do the same is called Turing complete. That's the test. And that's our starting point: a compiler is just a set of rules that turns your code into steps like these."
 -->
 
 ---
@@ -329,6 +408,58 @@ Stress: the optimizer must never change what the program does. That's where the 
 
 ---
 
+# Optimization, in code
+
+<div class="grid grid-cols-2 gap-8 mt-6">
+<div>
+
+**Before**
+
+```c
+static int scale(int x) {
+    int rate = 2 * 3;
+    int unused = x * 100;
+    if (rate > 10) return -1;
+    return x * rate + (10 + 5);
+}
+
+int price(int x) {
+    return scale(x) + 1;
+}
+```
+
+</div>
+<div>
+
+<v-click>
+
+**After**
+
+```c
+int price(int x) {
+    return 6 * x + 16;
+}
+```
+
+</v-click>
+
+</div>
+</div>
+
+<v-click>
+
+<div class="mt-6 text-lg opacity-80">Same result for every input. The unused value and the branch that never runs are gone.</div>
+
+</v-click>
+
+<!--
+~1.5 min. Script: "Same program. Read it like a human would: the variable nobody uses can go, the if can never be true so it can go, the helper function is just arithmetic, so write it directly. The optimizer does these same steps for you."
+
+Check: scale(x) + 1 = 6x + 15 + 1 = 6x + 16 for every x.
+-->
+
+---
+
 # Up next: Code generation
 
 <div class="relative mx-auto mt-4 w-fit max-w-full">
@@ -363,7 +494,7 @@ Stress: the optimizer must never change what the program does. That's where the 
 
 **Native code**
 
-<div class="mt-3 opacity-70">C, Rust</div>
+<div class="mt-3 opacity-70">C, Rust, GraalVM</div>
 
 </div>
 <div class="border rounded-xl p-6">
@@ -407,17 +538,6 @@ Kotlin has one frontend and several backends
 <!--
 ~1.5 min. Script: "Kotlin is a good example of the IR paying off. One frontend, three backends. The JVM bytecode is the decoupling point: any language that compiles to it runs on the same VM, which is why Java, Scala and Clojure share it."
 -->
-
----
-
-# Up next: Runtime
-
-<img src="/crafting-interpreters-pipeline.png" alt="Compiler pipeline mountain" class="mx-auto mt-4 max-h-[64vh] w-auto" />
-
-<!--
-~0.5 min. Script: "Next, the runtime. This is where the program actually executes."
--->
-
 ---
 
 # Runtime
